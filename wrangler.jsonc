@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "newsnow-xhalo",
+  "main": "./dist/output/public/_worker.js/index.js",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "nsapi.xhalo.co",
+      "custom_domain": true
+    }
+  ],
+  "build": {
+    "command": "pnpm exec cross-env CF_PAGES=1 pnpm build"
+  },
+  "assets": {
+    "directory": "./dist/output/public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "NEWSNOW_DB",
+      "database_name": "newsnow",
+      "database_id": "ca06b74b-3fa9-417a-a0f6-c2fc00ea5eb1"
+    }
+  ],
+  "vars": {
+    "ENABLE_CACHE": "true",
+    "INIT_TABLE": "true"
+  }
+}
